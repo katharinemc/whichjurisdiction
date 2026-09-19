@@ -1,11 +1,13 @@
 (function (global) {
   var QUESTIONS = [
     {
-      id: 1,
-      prompt: `Fill in the blank: "_____ Seraphim Rose"`,
+      id: 5,
+      prompt: "Your cathedral was built...",
       choices: [
-        { id: "1A", label: "Father", points: { OCA: 2, Antiochian: 1, GOA: 1 } },
-        { id: "1B", label: "Saint", points: { ROCOR: 2, HOCNA: 2 } }
+        { id: "5A", label: "By immigrants, brick by brick, in the 1920s", points: { OCA: 1 } },
+        { id: "5B", label: "With a $40M capital campaign and a gala", points: { GOA: 4 } },
+        { id: "5C", label: `It's a converted Baptist church we still call "the building"`, points: { HOCNA: 2 } },
+        { id: "5D", label: "It's a monastery, and also possibly the site of a genuine miracle", points: { Jerusalem: 4 } }
       ]
     },
     {
@@ -20,38 +22,21 @@
       ]
     },
     {
-      id: 3,
-      prompt: "True or False: Soup is effeminate.",
+      id: 10,
+      prompt: "Coffee hour is...",
       choices: [
-        { id: "3T", label: "True", points: { ROCOR: 1, HOCNA: 1 } },
-        { id: "3F", label: "False", points: {} }
+        { id: "10A", label: "A folding table with a Dunkin' Donuts box", points: { OCA: 1 } },
+        { id: "10B", label: "There isn't one, everyone just leaves", points: { HOCNA: 2, Jerusalem: 2 } },
+        { id: "10C", label: "A theological debate that started over pastries and hasn't ended", points: { OCA: 2, Antiochian: 2 } },
+        { id: "10D", label: "A full spread, an unspoken seating chart, and a very clear sense of whose family paid for the icon screen", points: { GOA: 4 } }
       ]
     },
     {
-      id: 4,
-      prompt: "Imagine you have a wife. Does she wear pants?",
+      id: 1,
+      prompt: `Fill in the blank: "_____ Seraphim Rose"`,
       choices: [
-        { id: "4A", label: "No", points: { ROCOR: 3, HOCNA: 3 } },
-        { id: "4B", label: "Yes", points: {} }
-      ]
-    },
-    {
-      id: 4.5,
-      prompt: "To church too?",
-      dependsOn: { questionId: 4, choiceId: "4B" },
-      choices: [
-        { id: "4.5A", label: "Yes, to church too.", points: {} },
-        { id: "4.5B", label: "No, only around the house.", points: { ROCOR: 2, HOCNA: 1, Antiochian: 1 } }
-      ]
-    },
-    {
-      id: 5,
-      prompt: "Your cathedral was built...",
-      choices: [
-        { id: "5A", label: "By immigrants, brick by brick, in the 1920s", points: { OCA: 1 } },
-        { id: "5B", label: "With a $40M capital campaign and a gala", points: { GOA: 4 } },
-        { id: "5C", label: `It's a converted Baptist church we still call "the building"`, points: { HOCNA: 2 } },
-        { id: "5D", label: "It's a monastery, and also possibly the site of a genuine miracle", points: { Jerusalem: 4 } }
+        { id: "1A", label: "Father", points: { OCA: 2, Antiochian: 1, GOA: 1 } },
+        { id: "1B", label: "Saint", points: { ROCOR: 2, HOCNA: 2 } }
       ]
     },
     {
@@ -65,6 +50,16 @@
       ]
     },
     {
+      id: 17,
+      prompt: "What does the chanting sound like at your parish?",
+      choices: [
+        { id: "17A", label: "Byzantine — monophonic, modal, someone holding the drone", points: { GOA: 2, Antiochian: 2 } },
+        { id: "17B", label: "Four-part harmony, sounds like a hymnal choir concert", points: { OCA: 4 } },
+        { id: "17C", label: "Hymns from a hymnal, four-part, and vaguely Anglican", points: { Antiochian: 2 } },
+        { id: "17D", label: "Znamenny chant — monastic, ancient, austere", points: { ROCOR: 2, HOCNA: 1 } }
+      ]
+    },
+    {
       id: 7,
       prompt: "Someone asks what jurisdiction you're in. Your instinct is to...",
       choices: [
@@ -72,6 +67,24 @@
         { id: "7B", label: `Just say "Orthodox" and hope they don't ask more`, points: { OCA: 4 } },
         { id: "7C", label: "Correct their canonical terminology", points: { ROCOR: 2, HOCNA: 1 } },
         { id: "7D", label: "Mention the metropolitan by name like a personal friend", points: { GOA: 4 } }
+      ]
+    },
+    {
+      id: 3,
+      prompt: "True or False: Soup is effeminate.",
+      choices: [
+        { id: "3T", label: "True", points: { ROCOR: 1, HOCNA: 1 } },
+        { id: "3F", label: "False", points: {} }
+      ]
+    },
+    {
+      id: 18,
+      prompt: "The children in our parish...",
+      choices: [
+        { id: "18A", label: "Already have strong opinions about wedding dance formations", points: { GOA: 2 } },
+        { id: "18B", label: "Vanish for six weeks every summer to a camp in the mountains all their friends also go to", points: { Antiochian: 4 } },
+        { id: "18C", label: "Are homeschooled, partly to keep the culture war out of the curriculum", points: { ROCOR: 2 } },
+        { id: "18D", label: "There are no children", points: { Jerusalem: 2 } }
       ]
     },
     {
@@ -96,13 +109,20 @@
       ]
     },
     {
-      id: 10,
-      prompt: "Coffee hour is...",
+      id: 4,
+      prompt: "Imagine you have a wife. Does she wear pants?",
       choices: [
-        { id: "10A", label: "A folding table with a Dunkin' Donuts box", points: { OCA: 1 } },
-        { id: "10B", label: "There isn't one, everyone just leaves", points: { HOCNA: 2, Jerusalem: 2 } },
-        { id: "10C", label: "A theological debate that started over pastries and hasn't ended", points: { OCA: 2, Antiochian: 2 } },
-        { id: "10D", label: "A full spread, an unspoken seating chart, and a very clear sense of whose family paid for the icon screen", points: { GOA: 4 } }
+        { id: "4A", label: "No", points: { ROCOR: 3, HOCNA: 3 } },
+        { id: "4B", label: "Yes", points: {} }
+      ]
+    },
+    {
+      id: 4.5,
+      prompt: "To church too?",
+      dependsOn: { questionId: 4, choiceId: "4B" },
+      choices: [
+        { id: "4.5A", label: "Yes, to church too.", points: {} },
+        { id: "4.5B", label: "No, only around the house.", points: { ROCOR: 2, HOCNA: 1, Antiochian: 1 } }
       ]
     },
     {
@@ -165,26 +185,6 @@
         { id: "16C", label: "Strictly, and everyone in a 10-foot radius knows about it", points: { ROCOR: 2, HOCNA: 1, Antiochian: 1 } },
         { id: "16D", label: "You fast from something modern instead — screens, complaining", points: { GOA: 0.5, Antiochian: 0.5, OCA: 0.5 } },
         { id: "16E", label: "Not as well as I should", points: { GOA: 0.5, Antiochian: 0.5, OCA: 0.5 } }
-      ]
-    },
-    {
-      id: 17,
-      prompt: "What does the chanting sound like at your parish?",
-      choices: [
-        { id: "17A", label: "Byzantine — monophonic, modal, someone holding the drone", points: { GOA: 2, Antiochian: 2 } },
-        { id: "17B", label: "Four-part harmony, sounds like a hymnal choir concert", points: { OCA: 4 } },
-        { id: "17C", label: "Hymns from a hymnal, four-part, and vaguely Anglican", points: { Antiochian: 2 } },
-        { id: "17D", label: "Znamenny chant — monastic, ancient, austere", points: { ROCOR: 2, HOCNA: 1 } }
-      ]
-    },
-    {
-      id: 18,
-      prompt: "The children in our parish...",
-      choices: [
-        { id: "18A", label: "Already have strong opinions about wedding dance formations", points: { GOA: 2 } },
-        { id: "18B", label: "Vanish for six weeks every summer to a camp in the mountains all their friends also go to", points: { Antiochian: 4 } },
-        { id: "18C", label: "Are homeschooled, partly to keep the culture war out of the curriculum", points: { ROCOR: 2 } },
-        { id: "18D", label: "There are no children", points: { Jerusalem: 2 } }
       ]
     },
     {
