@@ -11,8 +11,8 @@ it separately from Cloudflare's dashboard or CLI.
    Copy the printed `id` into `wrangler.toml`, replacing
    `REPLACE_WITH_REAL_KV_NAMESPACE_ID`.
 4. In `src/worker.js`, replace `ALLOWED_ORIGIN` with the site's real deployed
-   domain (must match the `CNAME` file at the repo root, e.g.
-   `https://your-real-domain.com`).
+   domain (must match the `CNAME` file at the repo root — currently the
+   placeholder `your-domain-here.com`, same as everywhere else in this repo).
 5. `npx wrangler deploy`
 6. Note the deployed worker URL (or set up a custom route/domain for it in
    the Cloudflare dashboard), and update `ANALYTICS_ENDPOINT` in
