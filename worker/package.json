@@ -1,0 +1,11 @@
+{
+  "name": "jurisdiction-quiz-analytics",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
