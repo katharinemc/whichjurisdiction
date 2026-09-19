@@ -3,7 +3,7 @@
 
   var STORAGE_KEY = "jurisdictionQuizAnswers";
   var questions = window.QuizData.QUESTIONS;
-  var state = window.QuizState.createInitialState(questions);
+  var state = window.QuizState.createInitialState();
 
   var stored = sessionStorage.getItem(STORAGE_KEY);
   if (stored) {
@@ -18,13 +18,14 @@
   var questionContainer = document.getElementById("question-container");
 
   function render() {
-    if (window.QuizState.isComplete(state)) {
+    if (window.QuizState.isComplete(state, questions)) {
       window.location.href = "results.html";
       return;
     }
 
-    var question = questions[state.index];
-    progressBar.style.width = Math.round((state.index / questions.length) * 100) + "%";
+    var visible = window.QuizState.visibleQuestions(questions, state.answers);
+    var question = visible[state.index];
+    progressBar.style.width = Math.round((state.index / visible.length) * 100) + "%";
 
     questionContainer.innerHTML = "";
 
@@ -52,7 +53,7 @@
 
   function selectChoice(questionId, choiceId) {
     state = window.QuizState.recordAnswer(state, questionId, choiceId);
-    state = window.QuizState.advance(state);
+    state = window.QuizState.advance(state, questions);
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state.answers));
     render();
   }

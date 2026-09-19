@@ -32,8 +32,16 @@
       prompt: "Imagine you have a wife. Does she wear pants?",
       choices: [
         { id: "4A", label: "No", points: { ROCOR: 3, HOCNA: 3 } },
-        { id: "4B1", label: "Yes, to church too", points: {} },
-        { id: "4B2", label: "Yes, but not around the house", points: { ROCOR: 2, HOCNA: 1, Antiochian: 1 } }
+        { id: "4B", label: "Yes", points: {} }
+      ]
+    },
+    {
+      id: 4.5,
+      prompt: "To church too?",
+      dependsOn: { questionId: 4, choiceId: "4B" },
+      choices: [
+        { id: "4.5A", label: "Yes, to church too", points: {} },
+        { id: "4.5B", label: "No, only around the house", points: { ROCOR: 2, HOCNA: 1, Antiochian: 1 } }
       ]
     },
     {
