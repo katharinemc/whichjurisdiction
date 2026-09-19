@@ -1,7 +1,9 @@
 (function (global) {
   var FLAG_KEY = "jurisdictionQuizAnalyticsSent";
-  // Placeholder — replace with the deployed worker's URL (see worker/README.md, Task 13).
-  var ANALYTICS_ENDPOINT = "https://analytics.your-domain-here.com";
+  // Requires the worker (worker/) to be deployed and routed to this subdomain
+  // first — see worker/README.md. Until then, this fetch will just fail
+  // silently (caught below), which is harmless but means no counts land.
+  var ANALYTICS_ENDPOINT = "https://analytics.whichjurisdiction.com";
 
   function reportResults(resultKeys) {
     if (typeof sessionStorage === "undefined") return;

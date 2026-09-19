@@ -1,6 +1,5 @@
 const JURISDICTION_KEYS = ["GOA", "Antiochian", "OCA", "ROCOR", "Jerusalem", "HOCNA"];
-// Placeholder — replace with the site's real deployed domain before going live.
-const ALLOWED_ORIGIN = "https://your-domain-here.com";
+const ALLOWED_ORIGIN = "https://whichjurisdiction.com";
 
 function corsHeaders() {
   return {
