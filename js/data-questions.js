@@ -40,8 +40,8 @@
       prompt: "To church too?",
       dependsOn: { questionId: 4, choiceId: "4B" },
       choices: [
-        { id: "4.5A", label: "Yes, to church too", points: {} },
-        { id: "4.5B", label: "No, only around the house", points: { ROCOR: 2, HOCNA: 1, Antiochian: 1 } }
+        { id: "4.5A", label: "Yes, to church too.", points: {} },
+        { id: "4.5B", label: "No, only around the house.", points: { ROCOR: 2, HOCNA: 1, Antiochian: 1 } }
       ]
     },
     {
