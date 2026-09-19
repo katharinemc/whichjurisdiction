@@ -932,7 +932,7 @@ nav.site-nav a:hover {
   color: var(--oxblood);
 }
 
-h1, h2, .question-prompt, .result-name {
+.question-prompt, .result-name {
   font-family: var(--font-serif);
   font-weight: 600;
 }
