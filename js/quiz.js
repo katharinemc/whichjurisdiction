@@ -2,16 +2,28 @@
   if (typeof document === "undefined") return;
 
   var STORAGE_KEY = "jurisdictionQuizAnswers";
+  // Must match js/analytics.js's FLAG_KEY.
+  var ANALYTICS_FLAG_KEY = "jurisdictionQuizAnalyticsSent";
   var questions = window.QuizData.QUESTIONS;
   var state = window.QuizState.createInitialState();
 
   var stored = sessionStorage.getItem(STORAGE_KEY);
   if (stored) {
     var storedAnswers = JSON.parse(stored);
+    var restoredState = window.QuizState.createInitialState();
     Object.keys(storedAnswers).forEach(function (questionId) {
-      state = window.QuizState.recordAnswer(state, Number(questionId), storedAnswers[questionId]);
+      restoredState = window.QuizState.recordAnswer(restoredState, Number(questionId), storedAnswers[questionId]);
     });
-    state.index = Object.keys(storedAnswers).length;
+    restoredState.index = Object.keys(storedAnswers).length;
+
+    if (window.QuizState.isComplete(restoredState, questions)) {
+      // A previously completed quiz is still in storage — landing on this
+      // page again (e.g. "Take it again") means starting over, not resuming.
+      sessionStorage.removeItem(STORAGE_KEY);
+      sessionStorage.removeItem(ANALYTICS_FLAG_KEY);
+    } else {
+      state = restoredState;
+    }
   }
 
   var progressBar = document.getElementById("progress-bar");
