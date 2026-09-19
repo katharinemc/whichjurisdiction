@@ -184,6 +184,10 @@ nav.site-nav a:hover {
   margin-top: 1.5rem;
 }
 
+.carousel-dots:empty {
+  margin-top: 0;
+}
+
 .carousel-dot {
   width: 8px;
   height: 8px;
@@ -195,7 +199,7 @@ nav.site-nav a:hover {
 }
 
 .carousel-dot.active {
-  background: var(--purple);
+  background: var(--oxblood);
 }
 
 .writeup p {
