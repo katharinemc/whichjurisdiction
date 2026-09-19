@@ -33,3 +33,8 @@ test("no jurisdiction entry contains test-subject or editorial fields", () => {
     assert.deepStrictEqual(Object.keys(entry).sort(), ["hasPage", "key", "name", "slug", "writeup"].sort());
   });
 });
+
+test("ROCOR and HOCNA display names spell out the full jurisdiction with the abbreviation appended", () => {
+  assert.strictEqual(JURISDICTIONS.ROCOR.name, "Russian Orthodox Church Outside Russia (ROCOR)");
+  assert.strictEqual(JURISDICTIONS.HOCNA.name, "The Holy Orthodox Church of North America (HOCNA)");
+});

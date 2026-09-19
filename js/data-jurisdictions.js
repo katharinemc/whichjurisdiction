@@ -35,7 +35,7 @@
     },
     ROCOR: {
       key: "ROCOR",
-      name: "Russian Orthodox Church Outside Russia",
+      name: "Russian Orthodox Church Outside Russia (ROCOR)",
       hasPage: true,
       slug: "rocor",
       writeup: [
@@ -59,7 +59,7 @@
     },
     HOCNA: {
       key: "HOCNA",
-      name: "HOCNA",
+      name: "The Holy Orthodox Church of North America (HOCNA)",
       hasPage: false,
       slug: null,
       writeup: [
