@@ -1,41 +1,45 @@
 // js/results-view.test.js
 const test = require("node:test");
 const assert = require("node:assert");
-const { deriveResultsView, SPLIT_THRESHOLD, LEANING_THRESHOLD } = require("./results-view.js");
+const { deriveResultsView, MAJORITY_THRESHOLD } = require("./results-view.js");
 
 // Synthetic percentage sets only — never the notes file's worked examples.
 const KEYS = ["GOA", "Antiochian", "OCA", "ROCOR", "Jerusalem", "HOCNA"];
 
-test("a clear leader with a wide gap is the sole winner", () => {
-  const percentages = { GOA: 50, Antiochian: 20, OCA: 15, ROCOR: 10, Jerusalem: 3, HOCNA: 2 };
+test("a decisive top result alone reaches the majority threshold", () => {
+  const percentages = { GOA: 65, Antiochian: 20, OCA: 10, ROCOR: 3, Jerusalem: 1, HOCNA: 1 };
   const view = deriveResultsView(percentages, KEYS);
   assert.strictEqual(view.winners.length, 1);
   assert.strictEqual(view.winners[0].key, "GOA");
 });
 
-test("a gap within the split threshold produces two winners", () => {
+test("exactly at the threshold needs only one card", () => {
+  const percentages = { GOA: 51, Antiochian: 49, OCA: 0, ROCOR: 0, Jerusalem: 0, HOCNA: 0 };
+  const view = deriveResultsView(percentages, KEYS);
+  assert.strictEqual(view.winners.length, 1);
+  assert.strictEqual(view.winners[0].key, "GOA");
+});
+
+test("a top result under the threshold pulls in the next-highest until cumulative crosses it", () => {
   const percentages = { ROCOR: 40, HOCNA: 37, GOA: 15, OCA: 5, Antiochian: 2, Jerusalem: 1 };
   const view = deriveResultsView(percentages, KEYS);
-  assert.strictEqual(view.winners.length, 2);
-  assert.deepStrictEqual(view.winners.map((w) => w.key).sort(), ["HOCNA", "ROCOR"].sort());
-  assert.deepStrictEqual(view.leaning.map((w) => w.key), ["GOA"]);
+  // 40 + 37 = 77 >= 51, stop after 2 — the third-place GOA (15) is not needed.
+  assert.deepStrictEqual(view.winners.map((w) => w.key), ["ROCOR", "HOCNA"]);
 });
 
-test("leaning list includes anything at or above 10 percent that isn't a winner", () => {
-  const percentages = { GOA: 50, OCA: 20, Antiochian: 16, ROCOR: 9, Jerusalem: 3, HOCNA: 2 };
+test("a fragmented spread can take three or more cards", () => {
+  const percentages = { GOA: 20, Antiochian: 18, OCA: 17, ROCOR: 16, Jerusalem: 15, HOCNA: 14 };
   const view = deriveResultsView(percentages, KEYS);
-  assert.strictEqual(view.winners.length, 1);
-  assert.strictEqual(view.winners[0].key, "GOA");
-  assert.deepStrictEqual(view.leaning.map((w) => w.key), ["OCA", "Antiochian"]);
+  // 20 + 18 + 17 = 55 >= 51, stop after 3.
+  assert.deepStrictEqual(view.winners.map((w) => w.key), ["GOA", "Antiochian", "OCA"]);
 });
 
-test("anything below 10 percent is never shown, even at rank 2", () => {
-  const percentages = { GOA: 95, Antiochian: 5, OCA: 0, ROCOR: 0, Jerusalem: 0, HOCNA: 0 };
+test("cards are ordered by descending percentage regardless of key order", () => {
+  const percentages = { HOCNA: 55, GOA: 45, Antiochian: 0, OCA: 0, ROCOR: 0, Jerusalem: 0 };
   const view = deriveResultsView(percentages, KEYS);
-  assert.strictEqual(view.leaning.length, 0);
+  assert.deepStrictEqual(view.winners.map((w) => w.key), ["HOCNA"]);
 });
 
-test("threshold constants match the spec", () => {
-  assert.strictEqual(SPLIT_THRESHOLD, 5);
-  assert.strictEqual(LEANING_THRESHOLD, 10);
+test("the majority threshold constant is 51", () => {
+  assert.strictEqual(MAJORITY_THRESHOLD, 51);
 });
