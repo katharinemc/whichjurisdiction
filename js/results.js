@@ -21,10 +21,12 @@
   var scored = window.Scoring.scoreQuiz(answers, questions);
   var view = window.ResultsView.deriveResultsView(scored.percentages, window.Scoring.JURISDICTION_KEYS);
 
-  var winnersEl = document.getElementById("results-winners");
-  var leaningEl = document.getElementById("results-leaning");
+  var carousel = document.getElementById("result-carousel");
+  var dotsEl = document.getElementById("carousel-dots");
 
-  winnersEl.innerHTML = "";
+  carousel.innerHTML = "";
+  dotsEl.innerHTML = "";
+
   view.winners.forEach(function (entry) {
     var jurisdiction = jurisdictions[entry.key];
 
@@ -36,6 +38,11 @@
     name.textContent = jurisdiction.name;
     card.appendChild(name);
 
+    var percentage = document.createElement("p");
+    percentage.className = "result-percentage";
+    percentage.textContent = entry.percentage + "%";
+    card.appendChild(percentage);
+
     jurisdiction.writeup.forEach(function (paragraph) {
       var p = document.createElement("p");
       p.className = "result-paragraph";
@@ -43,49 +50,28 @@
       card.appendChild(p);
     });
 
-    winnersEl.appendChild(card);
+    carousel.appendChild(card);
   });
 
-  leaningEl.innerHTML = "";
-  if (view.leaning.length > 0) {
-    var divider = document.createElement("div");
-    divider.className = "cross-divider";
-    divider.innerHTML =
-      '<span class="cross-bar cross-bar-top"></span>' +
-      '<span class="cross-bar cross-bar-mid"></span>' +
-      '<span class="cross-bar cross-bar-bottom"></span>';
-    leaningEl.appendChild(divider);
-
-    var heading = document.createElement("h3");
-    heading.className = "leaning-heading";
-    heading.textContent = "Leaning";
-    leaningEl.appendChild(heading);
-
-    var list = document.createElement("ul");
-    list.className = "bar-list";
-
-    view.leaning.forEach(function (entry) {
-      var jurisdiction = jurisdictions[entry.key];
-      var item = document.createElement("li");
-      item.className = "bar-row";
-
-      var label = document.createElement("span");
-      label.className = "bar-label";
-      label.textContent = jurisdiction.name + " " + entry.percentage + "%";
-      item.appendChild(label);
-
-      var track = document.createElement("span");
-      track.className = "bar-track";
-      var fill = document.createElement("span");
-      fill.className = "bar-fill";
-      fill.style.width = entry.percentage + "%";
-      track.appendChild(fill);
-      item.appendChild(track);
-
-      list.appendChild(item);
+  if (view.winners.length > 1) {
+    view.winners.forEach(function (entry, index) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "carousel-dot" + (index === 0 ? " active" : "");
+      dot.setAttribute("aria-label", "Show result " + (index + 1) + " of " + view.winners.length);
+      dot.addEventListener("click", function () {
+        carousel.scrollTo({ left: index * carousel.clientWidth, behavior: "smooth" });
+      });
+      dotsEl.appendChild(dot);
     });
 
-    leaningEl.appendChild(list);
+    carousel.addEventListener("scroll", function () {
+      var activeIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
+      var dots = dotsEl.querySelectorAll(".carousel-dot");
+      dots.forEach(function (dot, index) {
+        dot.classList.toggle("active", index === activeIndex);
+      });
+    });
   }
 
   if (window.QuizAnalytics) {
