@@ -3,5 +3,9 @@ main = "src/worker.js"
 compatibility_date = "2026-09-18"
 
 kv_namespaces = [
-  { binding = "QUIZ_COUNTS", id = "REPLACE_WITH_REAL_KV_NAMESPACE_ID" }
+  { binding = "QUIZ_COUNTS", id = "874dfaef972142be92ecca0b0af1e065" }
+]
+
+routes = [
+  { pattern = "analytics.whichjurisdiction.com", custom_domain = true }
 ]
