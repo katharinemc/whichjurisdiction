@@ -28,10 +28,23 @@ test("every jurisdiction has at least one writeup paragraph", () => {
 });
 
 test("no jurisdiction entry contains test-subject or editorial fields", () => {
+  const ALLOWED_FIELDS = ["hasPage", "key", "name", "slug", "writeup", "writeupVariants"];
   EXPECTED_KEYS.forEach((key) => {
     const entry = JURISDICTIONS[key];
-    assert.deepStrictEqual(Object.keys(entry).sort(), ["hasPage", "key", "name", "slug", "writeup"].sort());
+    Object.keys(entry).forEach((field) => {
+      assert.ok(ALLOWED_FIELDS.includes(field), `${key} has an unrecognized field: ${field}`);
+    });
   });
+});
+
+test("only Antiochian has writeup variants, and both are non-empty", () => {
+  EXPECTED_KEYS.filter((key) => key !== "Antiochian").forEach((key) => {
+    assert.strictEqual(JURISDICTIONS[key].writeupVariants, undefined, `${key} should not have writeupVariants`);
+  });
+
+  const variants = JURISDICTIONS.Antiochian.writeupVariants;
+  assert.ok(Array.isArray(variants.convert) && variants.convert.length > 0);
+  assert.ok(Array.isArray(variants.cradle) && variants.cradle.length > 0);
 });
 
 test("ROCOR and HOCNA display names spell out the full jurisdiction with the abbreviation appended", () => {

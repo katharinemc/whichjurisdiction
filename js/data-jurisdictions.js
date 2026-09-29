@@ -20,7 +20,22 @@
         `You found this by accident, on purpose. Somewhere in your twenties there was a reading list — Lewis, then the Fathers, then a podcast, then it was too late — and you consumed an entire tradition in eighteen months the way other people binge a show. You don't do anything halfway. You're the type to memorize the seven ecumenical councils before you've even been chrismated, and you genuinely enjoy being the person at the table who actually knows the history. You weren't looking for beauty. You were looking for the correct answer, and once you found it, you needed everyone else to see it too.`,
         `You're not devout the quiet way — you're devout the way a debate champion is devout, unable to let a claim sit unexamined, especially your own. Somewhere back there you left a nondenominational church, or a Baptist one, or possibly a pulpit, and you brought the argumentative instincts with you; you just pointed them at Rome and Geneva instead. (If you're an Arab cradle reading this — you already know. Keep teaching them to dabke for the festival; someone has to.)`,
         `Antiochian fits you because it's the jurisdiction built by people who argued their way in — ex-youth-pastors, Western Rite refugees, podcast apologists — and it makes room for the argument to keep going. There's always a text thread mid-debate, always someone who left over something specific and will tell you exactly what, and always, somewhere, an Arabic coffee that no convert manages to drink correctly on the first try.`
-      ]
+      ],
+      writeupVariants: {
+        convert: [
+          `You found this by accident, on purpose. Somewhere in your twenties there was a reading list — Lewis, then the Fathers, then a podcast, then it was too late — and you consumed an entire tradition in eighteen months the way other people binge a show. You don't do anything halfway. You're the type to memorize the seven ecumenical councils before you've even been chrismated, and you genuinely enjoy being the person at the table who actually knows the history. You weren't looking for beauty. You were looking for the correct answer, and once you found it, you needed everyone else to see it too.`,
+          `You're not devout the quiet way — you're devout the way a debate champion is devout, unable to let a claim sit unexamined, especially your own. Somewhere back there you left a nondenominational church, or a Baptist one, or possibly a pulpit, and you brought the argumentative instincts with you; you just pointed them at Rome and Geneva instead. (If you're an Arab cradle reading this — you already know. Keep teaching them to dabke for the festival; someone has to.)`,
+          `Antiochian fits you because it's the jurisdiction built by people who argued their way in — ex-youth-pastors, Western Rite refugees, podcast apologists — and it makes room for the argument to keep going. There's always a text thread mid-debate, always someone who left over something specific and will tell you exactly what, and always, somewhere, an Arabic coffee that no convert manages to drink correctly on the first try.`
+        ],
+        cradle: [
+          `Arab, yes. Muslim, no. You've been correcting this since kindergarten — usually right after someone hears "inshallah" at Sunday dinner and thinks they've made a discovery, or asks how your Ramadan's going, not realizing you've already been fasting for six weeks for an entirely different religion.`,
+          `Sometimes they even try to argue with you, but you already know the verse by heart: "In Antioch, the disciples were first called Christians."`,
+          `And what else did the Arabs give Christianity? Nothing much. Just a little town called Bethlehem.`,
+          `There is a full marriage market operating at the back of the sanctuary at any given liturgy: aunties whispering, pointing, cross-referencing families over the incense, closing deals before the Gospel reading. Nobody involved asked to be involved, but we've had three baptisms this year from children born in auntie-facilitated marriages.`,
+          `Liturgy starts whenever it starts. The printed time is an opening bid, nothing more.`,
+          `Antiochian fits you because it's the jurisdiction where your family's version of the Faith and the convert's version collide head-on in the parking lot after Pascha. The lot moves like Cairo at rush hour, everyone shouting directions nobody follows, somehow nobody actually angry. You'll never be able to fully explain that parking lot to a convert. You've stopped trying, mostly because it's more fun to watch them attempt to merge into it.`
+        ]
+      }
     },
     OCA: {
       key: "OCA",

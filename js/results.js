@@ -43,13 +43,53 @@
     percentage.textContent = entry.percentage + "%";
     card.appendChild(percentage);
 
-    jurisdiction.writeup.forEach(function (paragraph) {
-      var p = document.createElement("p");
-      p.className = "result-paragraph";
-      p.innerHTML = paragraph;
-      card.appendChild(p);
-    });
+    var bodyContainer = document.createElement("div");
+    bodyContainer.className = "result-body";
 
+    function renderBody(paragraphs) {
+      bodyContainer.innerHTML = "";
+      paragraphs.forEach(function (paragraph) {
+        var p = document.createElement("p");
+        p.className = "result-paragraph";
+        p.innerHTML = paragraph;
+        bodyContainer.appendChild(p);
+      });
+    }
+
+    if (jurisdiction.writeupVariants) {
+      var variantOptions = [
+        { key: "convert", label: "Convert" },
+        { key: "cradle", label: "Cradle" }
+      ];
+      var activeVariant = "convert";
+      var toggle = document.createElement("div");
+      toggle.className = "writeup-toggle";
+
+      var variantButtons = variantOptions.map(function (variant) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "writeup-toggle-btn";
+        button.textContent = variant.label;
+        button.setAttribute("aria-pressed", String(variant.key === activeVariant));
+        button.addEventListener("click", function () {
+          if (variant.key === activeVariant) return;
+          activeVariant = variant.key;
+          variantButtons.forEach(function (variantButton) {
+            variantButton.button.setAttribute("aria-pressed", String(variantButton.key === activeVariant));
+          });
+          renderBody(jurisdiction.writeupVariants[activeVariant]);
+        });
+        toggle.appendChild(button);
+        return { key: variant.key, button: button };
+      });
+
+      card.appendChild(toggle);
+      renderBody(jurisdiction.writeupVariants[activeVariant]);
+    } else {
+      renderBody(jurisdiction.writeup);
+    }
+
+    card.appendChild(bodyContainer);
     carousel.appendChild(card);
   });
 

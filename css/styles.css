@@ -220,6 +220,38 @@ nav.site-nav a:hover {
   margin: 0 0 1.5rem;
 }
 
+.writeup-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem;
+}
+
+.writeup-toggle-btn {
+  font-family: var(--font-sans);
+  background: transparent;
+  color: var(--oxblood);
+  border: 1px solid var(--oxblood);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.writeup-toggle-btn:hover {
+  background: rgba(122, 46, 46, 0.08);
+}
+
+.writeup-toggle-btn[aria-pressed="true"] {
+  background: var(--oxblood);
+  color: var(--parchment);
+}
+
+.writeup-toggle-btn[aria-pressed="true"]:hover {
+  background: var(--oxblood);
+  opacity: 0.9;
+}
+
 .settle-fade {
   animation: settleFade 0.7s ease-out;
 }
