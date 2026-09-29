@@ -25,12 +25,29 @@
     return state.index >= visibleQuestions(questions, state.answers).length;
   }
 
+  function back(state, questions) {
+    if (state.index <= 0) return state;
+
+    var newIndex = state.index - 1;
+    var keepIds = visibleQuestions(questions, state.answers)
+      .slice(0, newIndex + 1)
+      .map(function (question) { return question.id; });
+
+    var answers = {};
+    keepIds.forEach(function (id) {
+      if (state.answers[id] !== undefined) answers[id] = state.answers[id];
+    });
+
+    return Object.assign({}, state, { index: newIndex, answers: answers });
+  }
+
   var api = {
     createInitialState: createInitialState,
     recordAnswer: recordAnswer,
     advance: advance,
     isComplete: isComplete,
-    visibleQuestions: visibleQuestions
+    visibleQuestions: visibleQuestions,
+    back: back
   };
   if (typeof module !== "undefined" && module.exports) {
     module.exports = api;

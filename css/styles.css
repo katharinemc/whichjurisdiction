@@ -14,6 +14,9 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: var(--parchment);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -21,9 +24,14 @@ body {
 }
 
 .page {
+  flex: 1;
+  width: 100%;
   max-width: 640px;
   margin: 0 auto;
   padding: 2rem 1.25rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 nav.site-nav {
@@ -48,13 +56,39 @@ nav.site-nav a:hover {
   font-weight: 600;
 }
 
-.hero h1 {
-  font-size: 2.25rem;
-  margin-bottom: 0.5rem;
+.hero-card {
+  background: #fff8ec;
+  border: 1px solid rgba(35, 38, 47, 0.1);
+  border-radius: 32px 32px 8px 8px;
+  padding: 2.5rem 2rem;
+  text-align: center;
 }
 
-.hero p {
-  font-size: 1.1rem;
+.eyebrow {
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--oxblood);
+  margin: 0 0 0.75rem;
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  margin: 0 0 1rem;
+}
+
+.hero .lead {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.hero .body {
+  font-size: 1.05rem;
+  text-align: left;
 }
 
 .btn {
@@ -126,6 +160,30 @@ nav.site-nav a:hover {
   background: rgba(122, 46, 46, 0.06);
 }
 
+.choice-button.selected {
+  border-color: var(--oxblood);
+  background: rgba(122, 46, 46, 0.08);
+  font-weight: 600;
+}
+
+.back-button {
+  display: inline-block;
+  font-family: var(--font-sans);
+  background: none;
+  border: none;
+  color: rgba(35, 38, 47, 0.6);
+  padding: 0;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+
+.back-button:hover {
+  color: var(--oxblood);
+}
+
 .result-carousel {
   display: flex;
   overflow-x: auto;
@@ -189,6 +247,7 @@ nav.site-nav a:hover {
 }
 
 .carousel-dot {
+  position: relative;
   width: 8px;
   height: 8px;
   padding: 0;
@@ -202,8 +261,76 @@ nav.site-nav a:hover {
   background: var(--oxblood);
 }
 
+.carousel-dot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 32px;
+  height: 32px;
+  transform: translate(-50%, -50%);
+}
+
 .writeup p {
   line-height: 1.7;
+}
+
+.page-intro {
+  color: rgba(35, 38, 47, 0.7);
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+}
+
+.jurisdiction-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.jurisdiction-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: #fff8ec;
+  border: 1px solid rgba(35, 38, 47, 0.1);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.jurisdiction-card:hover,
+.jurisdiction-card:focus {
+  border-color: var(--oxblood);
+  transform: translateX(2px);
+}
+
+.jurisdiction-abbr {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--oxblood);
+  font-size: 1.05rem;
+  min-width: 4rem;
+}
+
+.jurisdiction-name {
+  font-size: 1.05rem;
+  flex: 1;
+}
+
+.jurisdiction-card::after {
+  content: "→";
+  color: rgba(35, 38, 47, 0.3);
+  font-size: 1.1rem;
+}
+
+.jurisdiction-card:hover::after,
+.jurisdiction-card:focus::after {
+  color: var(--oxblood);
 }
 
 footer.site-footer {
@@ -211,4 +338,57 @@ footer.site-footer {
   font-size: 0.85rem;
   padding: 2rem 1.25rem;
   color: rgba(35, 38, 47, 0.6);
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 1.5rem 1rem 2.5rem;
+  }
+
+  nav.site-nav {
+    gap: 1.25rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .hero-card {
+    padding: 2rem 1.25rem;
+  }
+
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero .lead {
+    font-size: 1.1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .question-prompt {
+    font-size: 1.2rem;
+  }
+
+  .result-card {
+    padding: 2.25rem 1.5rem 1.5rem;
+  }
+
+  .result-name {
+    font-size: 1.6rem;
+  }
+
+  .jurisdiction-card {
+    gap: 0.85rem;
+    padding: 1rem 1.1rem;
+  }
+
+  .jurisdiction-abbr {
+    min-width: 3rem;
+    font-size: 0.95rem;
+  }
+
+  .jurisdiction-name {
+    font-size: 0.95rem;
+  }
 }
